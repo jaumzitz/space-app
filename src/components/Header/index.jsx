@@ -16,6 +16,7 @@ const Header = () => {
 
         <HeaderStyled>
             <img src="/imagens/logo.png" alt="Logo do SpaceApp"/>
+            <TextField></TextField>
             
         </HeaderStyled>
 
