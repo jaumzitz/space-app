@@ -1,8 +1,8 @@
 import styled from "styled-components"
 
 const FigureStyled = styled.figure`
-     background-image: ${props => `url(${props.$backgroundImage})`};
-     flex-grow: 1;
+    background-image: ${props => `url(${props.$backgroundImage})`};
+    flex-grow: 1;
     background-repeat: no-repeat;
     display: flex;
     align-items: center;
@@ -13,13 +13,22 @@ const FigureStyled = styled.figure`
     background-size: cover;
 `
 
+const TitleStyled = styled.h1`
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    color: #FFFFFF;
+    max-width: 300px;
+    padding: 0 64px;
+`
+
 const Banner = ({ text, imageURL }) => {
     return (
-        <>
-            <FigureStyled $backgroundImage={imageURL}>
-                <h1>{text}</h1>
-            </FigureStyled>
-        </>
+
+        <FigureStyled $backgroundImage={imageURL}>
+            <TitleStyled>{text}</TitleStyled>
+        </FigureStyled>
+
     )
 }
 
