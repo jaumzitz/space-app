@@ -1,6 +1,6 @@
 import styled from "styled-components"
 import Image from "../Gallery/Image"
-
+import { useState } from "react"
 
 const Overlay = styled.div`
     background-color: rgba(0, 0, 0, 0.7);
@@ -13,25 +13,48 @@ const Overlay = styled.div`
 
 const Dialog = styled.dialog`
     position: absolute;
-    top: 294px;
+    top: 8vh;
+    background-color: transparent;
+    border: none;
+   
+   
 `
 
+const CloseButton = styled.button`
+position: absolute;
+        top: 30px;
+        right: 30px;
+        background-color: transparent;
+        border: none;
+
+        &:hover {
+            cursor: pointer
+        }
+`
+
+
+
 const ModalZoom = ({ photo }) => {
+
+
     return (
         <>
-            {photo &&
+            {photo && 
                 <>
-                    <Overlay></Overlay>
-                    <Dialog open={!!photo}>
-                        <Image
-                            photo={photo}
-                            expanded={true}
+                    <Overlay>
+                        <Dialog open={!!photo}>
+                            <form method="dialog">
+                                <CloseButton>
+                                    <img src="/icones/fechar.png" />
+                                </CloseButton>
+                            </form>
+                            <Image
+                                photo={photo}
+                                expanded={true}
 
-                        ></Image>
-                        <form method="dialog">
-                            <button>ok</button>
-                        </form>
-                    </Dialog>
+                            ></Image>
+                        </Dialog>
+                    </Overlay>
                 </>
             }
         </>

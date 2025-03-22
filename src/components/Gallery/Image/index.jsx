@@ -9,18 +9,33 @@ const PhotoCard = styled.figure`
     margin: 0;
     padding: 0;
 
+    
+    //position: absolute;
+    //right: 30px;
+    //top: 30px;
+    
+
     > img {
         border-radius: 20px 20px 0 0;
         height: 300px;
-        max-height: 300px;
+        
         
     }
 
-    &:hover {
+    &.expanded > img{
+       height: 500px;
+    }
 
+
+
+
+    ${props => props.expanded ? `
+        &:hover {
+            
         margin-top: -10px;
         transition: 200ms
-    }
+        }
+        ` : ''}
     
 `
 
@@ -29,9 +44,8 @@ const Caption = styled.figcaption`
     align-items: flex-end;
     padding: 10px 20px;
     justify-content: space-between;
-    
-    
     `
+
 const CaptionText = styled.div`
     display: flex;
     flex-direction: column;
@@ -42,11 +56,12 @@ const CaptionText = styled.div`
 
 
 
-
-
-const Image = ({ photo, expanded = true, onZoomRequested }) => {
+const Image = ({ photo, expanded, onZoomRequested }) => {
     return (
-        <PhotoCard>
+        <PhotoCard className={expanded ? 'expanded' : ''}>
+
+           
+
             <img src={photo.path} alt={photo.titulo}></img>
             <Caption>
                 <CaptionText>
@@ -56,19 +71,23 @@ const Image = ({ photo, expanded = true, onZoomRequested }) => {
                     <p>{photo.fonte}</p>
 
                 </CaptionText>
-                <footer>
-                    <IconButton>
-                        <img src="/icones/favorito.png"></img>
-                    </IconButton>
 
-                    <IconButton aria-hidden={expanded} onClick={() => {
-                        
-                        onZoomRequested(photo)}}>
-                    <img src="/icones/expandir.png"></img>
+                {!expanded &&
+                    <footer>
+                        <IconButton>
+                            <img src="/icones/favorito.png"></img>
+                        </IconButton>
 
-                </IconButton>
-            </footer>
-        </Caption>
+                        <IconButton aria-hidden={expanded} onClick={() => {
+                            onZoomRequested(photo)
+                        }}>
+                            <img src="/icones/expandir.png"></img>
+
+                        </IconButton>
+
+                    </footer>
+                }
+            </Caption>
         </PhotoCard >
     )
 }
