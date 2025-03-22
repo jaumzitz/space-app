@@ -24,7 +24,8 @@ const FluidSection = styled.section`
     padding: 0;
 `
 
-const Gallery = ({ photos = [], onPhotoSelected }) => {
+const Gallery = ({ photos = [], onPhotoSelected, onToggleFavorite }) => {
+    
     return (
         <>
             <Tags></Tags>
@@ -39,6 +40,7 @@ const Gallery = ({ photos = [], onPhotoSelected }) => {
                                 key={photo.id} 
                                 photo={photo}
                                 onZoomRequested={onPhotoSelected}
+                                onToggleFavorite={onToggleFavorite}
                                 ></Image>)}
                     </ImagesContainer>
 

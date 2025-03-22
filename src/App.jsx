@@ -8,6 +8,7 @@ import bannerBackground from "/imagens/banner.png"
 import photos from './photos.json'
 import { useState } from "react"
 import ModalZoom from "./components/ModalZoom"
+import Footer from "./components/Footer"
 
 const FundoGradiente = styled.div`
  background: linear-gradient(174.61deg, #041833 4.16%, #04244F 48%, #154580 96.76%);
@@ -38,6 +39,19 @@ const App = () => {
 
   const [galleryPhotos, setGalleryPhotos] = useState(photos)
   const [selectedPhoto, setSelectedPhoto] = useState(null)
+
+  const onToggleFavorite = (photo) => {
+    
+    
+    setGalleryPhotos(galleryPhotos.map(galleryPhoto => {
+      return {
+        ...galleryPhoto,
+        favorite: galleryPhoto.id === photo.id ? !galleryPhoto.favorite : galleryPhoto.favorite
+      }
+    }))
+    
+    
+  }
   
 
   return (
@@ -52,6 +66,7 @@ const App = () => {
             <Gallery
               photos={galleryPhotos}
               onPhotoSelected={photo => setSelectedPhoto(photo)}
+              onToggleFavorite={photo => onToggleFavorite(photo)}
               ></Gallery>
           </GalleryContent>
         </MainContainer>
@@ -60,6 +75,7 @@ const App = () => {
           onModalClose={() => setSelectedPhoto(null)}
           ></ModalZoom>
       </AppContainer>
+      <Footer></Footer>
     </FundoGradiente>
   )
 }

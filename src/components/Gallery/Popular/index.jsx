@@ -28,7 +28,9 @@ const Popular = () => {
                 <Title $alignment='left'>Popular</Title>
 
                 {
-                    popularPhotos.map(photo => <SmallImage src={photo.path} />)
+                    popularPhotos.map(photo => <SmallImage 
+                        key={photo.id}
+                        src={photo.path} />)
                 }
                 
                 <Button>Ver mais</Button>

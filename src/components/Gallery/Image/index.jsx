@@ -56,7 +56,10 @@ const CaptionText = styled.div`
 
 
 
-const Image = ({ photo, expanded, onZoomRequested }) => {
+const Image = ({ photo, expanded, onZoomRequested, onToggleFavorite }) => {
+
+    const favoriteIcon = photo.favorite ? '/icones/favorito-ativo.png' : '/icones/favorito.png'
+    
     return (
         <PhotoCard className={expanded ? 'expanded' : ''}>
 
@@ -74,8 +77,8 @@ const Image = ({ photo, expanded, onZoomRequested }) => {
 
                 {!expanded &&
                     <footer>
-                        <IconButton>
-                            <img src="/icones/favorito.png"></img>
+                        <IconButton onClick={() => onToggleFavorite(photo)}>
+                            <img src={favoriteIcon}></img>
                         </IconButton>
 
                         <IconButton aria-hidden={expanded} onClick={() => {
