@@ -34,17 +34,16 @@ position: absolute;
 
 
 
-const ModalZoom = ({ photo }) => {
-
+const ModalZoom = ({ photo, onModalClose }) => {
 
     return (
         <>
-            {photo && 
+            {photo &&
                 <>
                     <Overlay>
                         <Dialog open={!!photo}>
                             <form method="dialog">
-                                <CloseButton>
+                                <CloseButton formMethod="dialog" onClick={() => onModalClose()}>
                                     <img src="/icones/fechar.png" />
                                 </CloseButton>
                             </form>

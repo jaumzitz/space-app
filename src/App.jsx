@@ -5,7 +5,7 @@ import SideBar from "./components/SideBar"
 import Banner from "./components/Banner"
 import Gallery from "./components/Gallery"
 import bannerBackground from "/imagens/banner.png"
-import photos from './fotos.json'
+import photos from './photos.json'
 import { useState } from "react"
 import ModalZoom from "./components/ModalZoom"
 
@@ -57,7 +57,7 @@ const App = () => {
         </MainContainer>
         <ModalZoom
           photo={selectedPhoto}
-          
+          onModalClose={() => setSelectedPhoto(null)}
           ></ModalZoom>
       </AppContainer>
     </FundoGradiente>

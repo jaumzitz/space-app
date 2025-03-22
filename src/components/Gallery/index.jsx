@@ -19,6 +19,7 @@ const ImagesContainer = styled.ul`
 
 const FluidSection = styled.section`
     flex-grow: 1;
+    max-width: 60vw;
     margin: 0;
     padding: 0;
 `
