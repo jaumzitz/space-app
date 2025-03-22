@@ -4,18 +4,17 @@ import Tags from "./Tags"
 import Popular from "./Popular"
 import Image from './Image'
 
+const GalleryContainer = styled.section`
+    display: flex;
+    
+`
+
 const ImagesContainer = styled.ul`
     display: flex;
     flex-wrap: wrap;
     margin: 0;
     padding: 0;
-    justify-content: space-between;
-`
-
-
-const GalleryContainer = styled.section`
-    display: flex;
-    
+    gap: 20px;
 `
 
 const FluidSection = styled.section`
@@ -24,7 +23,7 @@ const FluidSection = styled.section`
     padding: 0;
 `
 
-const Gallery = ({ photos = [] }) => {
+const Gallery = ({ photos = [], onPhotoSelected }) => {
     return (
         <>
             <Tags></Tags>
@@ -33,13 +32,16 @@ const Gallery = ({ photos = [] }) => {
                 <FluidSection>
 
                     <Title>Navegue pela galeria</Title>
-                    
+                    <ImagesContainer>
+                        {photos.map(photo => 
+                            <Image 
+                                key={photo.id} 
+                                photo={photo}
+                                onZoomRequested={onPhotoSelected}
+                                ></Image>)}
+                    </ImagesContainer>
 
-                        <ImagesContainer>
-                            {photos.map(photo => <Image key={photo.id} photo={photo}></Image>)}
-                        </ImagesContainer>
 
-                    
                 </FluidSection>
                 <Popular></Popular>
             </GalleryContainer>
