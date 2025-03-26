@@ -6,7 +6,7 @@ import Banner from "./components/Banner"
 import Gallery from "./components/Gallery"
 import bannerBackground from "/imagens/banner.png"
 import photos from './photos.json'
-import { useState } from "react"
+import { use, useState } from "react"
 import ModalZoom from "./components/ModalZoom"
 import Footer from "./components/Footer"
 
@@ -39,41 +39,63 @@ const App = () => {
 
   const [galleryPhotos, setGalleryPhotos] = useState(photos)
   const [selectedPhoto, setSelectedPhoto] = useState(null)
+  const [searchString, setSearchString] = useState('')
+  const [filteredGallery, setFilteredGallery] = useState(galleryPhotos)
+
+  const onSearchChange = (text) => {
+    
+    
+    if (text) {
+      const filtered = galleryPhotos.filter(photo => photo.titulo.toLowerCase().includes(text.toLowerCase()))
+      setFilteredGallery(filtered)
+
+    } else {
+      setFilteredGallery(galleryPhotos)
+    }
+
+  }
 
   const onToggleFavorite = (photo) => {
-    
-    
+
+
+    setFilteredGallery(filteredGallery.map(galleryPhoto => {
+      return {
+        ...galleryPhoto,
+        favorite: galleryPhoto.id === photo.id ? !galleryPhoto.favorite : galleryPhoto.favorite
+      }
+    }))
+
     setGalleryPhotos(galleryPhotos.map(galleryPhoto => {
       return {
         ...galleryPhoto,
         favorite: galleryPhoto.id === photo.id ? !galleryPhoto.favorite : galleryPhoto.favorite
       }
     }))
-    
-    
+
+
   }
-  
+
 
   return (
     <FundoGradiente>
       <GlobalStyles />
       <AppContainer>
-        <Header />
+        <Header onSearchChange={text => onSearchChange(text)} />
         <MainContainer>
           <SideBar />
           <GalleryContent>
             <Banner imageURL={bannerBackground} text="A galeria mais completa de fotos do espaço!"></Banner>
             <Gallery
-              photos={galleryPhotos}
+              photos={filteredGallery}
               onPhotoSelected={photo => setSelectedPhoto(photo)}
               onToggleFavorite={photo => onToggleFavorite(photo)}
-              ></Gallery>
+            ></Gallery>
           </GalleryContent>
         </MainContainer>
         <ModalZoom
           photo={selectedPhoto}
           onModalClose={() => setSelectedPhoto(null)}
-          ></ModalZoom>
+        ></ModalZoom>
       </AppContainer>
       <Footer></Footer>
     </FundoGradiente>

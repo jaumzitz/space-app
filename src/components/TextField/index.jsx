@@ -29,10 +29,10 @@ const MagnifierIcon = styled.img`
     height: 38px;
 `
 
-const TextField = (props) => {
+const TextField = ({ onSearchChange }) => {
     return (
         <ContainerStyled>
-            <TextFieldStyled type="text" placeholder="O que você procura?" {...props} />
+            <TextFieldStyled type="text" placeholder="O que você procura?" onChange={(text) => onSearchChange(text.target.value)}/>
             <MagnifierIcon src={searchIcon}></MagnifierIcon>
         </ContainerStyled>
 

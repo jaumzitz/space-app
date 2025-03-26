@@ -11,12 +11,12 @@ const HeaderStyled = styled.header`
     }
 `
 
-const Header = () => {
+const Header = ({onSearchChange}) => {
     return (
 
         <HeaderStyled>
             <img src="/imagens/logo.png" alt="Logo do SpaceApp"/>
-            <TextField></TextField>
+            <TextField onSearchChange={onSearchChange}></TextField>
             
         </HeaderStyled>
 
